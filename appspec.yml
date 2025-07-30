@@ -1,0 +1,16 @@
+version: 0.0
+Resources:
+  - ResourceType: Kubernetes::Manifest
+    ResourceName: "brain-tasks-app"
+    Properties:
+      ClusterName: mindtrack
+      Namespace: default
+      ManifestPath: deployment.yaml
+
+  - ResourceType: Kubernetes::Manifest
+    ResourceName: "brain-tasks-service"
+    Properties:
+      ClusterName: mindtrack
+      Namespace: default
+      ManifestPath: service.yaml
+
