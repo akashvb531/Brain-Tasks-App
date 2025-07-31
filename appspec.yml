@@ -1,16 +1,16 @@
 version: 0.0
-Resources:
-  - ResourceType: Kubernetes::Manifest
-    ResourceName: "brain-tasks-app"
-    Properties:
-      ClusterName: mindtrack
-      Namespace: default
-      ManifestPath: deployment.yaml
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/brain-tasks-app
 
-  - ResourceType: Kubernetes::Manifest
-    ResourceName: "brain-tasks-service"
-    Properties:
-      ClusterName: mindtrack
-      Namespace: default
-      ManifestPath: service.yaml
+hooks:
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: ubuntu
 
